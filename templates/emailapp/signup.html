@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load i18n %}  <!-- Load the i18n template tags -->
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "User Signup" %}</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">{% trans "User Signup" %}</h1>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">{% trans "Name:" %}</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">{% trans "Email:" %}</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+        </form>
+
+        {% if username and password %}
+            <h2 class="mt-4">{% trans "Account Details" %}</h2>
+            <p>{% trans "Username:" %} {{ username }}</p>
+            <p>{% trans "Password:" %} {{ password }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
